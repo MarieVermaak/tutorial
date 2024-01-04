@@ -2,49 +2,72 @@ import React from "react";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+const books = [
+  {
+    author: 'James Clear',
+    title: 'Atomic Habits',
+    img: './images/book-1.jpg',
+    id: 1,
+  },
 
-const firstBook = {
-  author: 'James Clear',
-  title: 'Atomic Habits',
-  img: './images/book-1.jpg',
-};
+  {
+    author: 'Daniel James Brown',
+    title: 'The Boys in the Boat',
+    img: './images/book-2.jpg',
+    id: 2,
+  },
+];
 
-const secondBook = {
-  author: 'Daniel James Brown',
-  title: 'The Boys in the Boat',
-  img: './images/book-2.jpg',
-};
+
+
+
+
 
 const BookList = () => {
   return (
     <section className='booklist'>
-      <Book
-        author={firstBook.author}
-        title={firstBook.title}
-        img={firstBook.img}>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum a libero quis iure nostrum.</p>
-      <button>Click me</button>
-      </Book>
-
-      <Book 
-      author={secondBook.author}
-      title={secondBook.title} 
-      img={secondBook.img} />
-
+      <EventExamples />
+      {books.map((book) => {
+        return <Book {...book} key={book.id} />;
+      })}
     </section>
   );
-}
+};
 
-const Book = ({img, title, author, children}) => {
+const EventExamples = () => {
+  const handleFormInput = () => {
+    console.log('handle form input');
+  };
+
+  const handleButtonClick = () => {
+    alert('handle Button Click');
+  };
+
+  return <section>
+    <form>
+      <h1>Typical Form</h1>
+      <input type='text'
+        name='example'
+        onChange={handleFormInput}
+        style={{ margin: '1rem 0' }} 
+        />
+    </form>
+
+    <button onClick={handleButtonClick}> Click Me </button>
+
+  </section >
+};
+
+const Book = (props) => {
+  const { img, title, author } = props
   return (
     <article className='book'>
       <img src={img} />
       <h2>{title}</h2>
       <h4>{author.toUpperCase()}</h4>
-      {children}
     </article>
   );
-}
+};
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -117,3 +140,60 @@ root.render(<BookList />); // rendering the greeting component
 // Special prop in React = Children ^_^
 // - gives us access to everything we render between component tags
 // - special prop, has to be children
+
+// Lists = .Map as the array method
+// - refactor your code with const books = [] ---> remember square brackets usually indicate an array so we are putting our objects into an array
+// -  each item is that object 
+// in React we can't render objects directly from JSX
+// here comes map! .Map is making a new array from calling a function on each array element 
+// i.e =
+
+
+//const names = ['john', 'peter', 'susan'];
+// const newNames = names.map((name) => { ----> names.Map and a callback function, it will return newNames which is the new array and we wrap it 
+//   console.log(name);
+//   return <h1>{name}</h1>;
+// });  
+
+// function BookList() {
+//   return <section className='booklist'>{newNames}</section>;
+// }
+// the parameter is referencing the string or object and remember to wrap what you;re grabbing the for example
+// {name} curly brackets is IMPORTANT
+// create a list, iterate over the list to return the needed html ---. pretty cool :)
+
+// Key prop - an id ---->  so react can identify it. Usually the data we pull would have an id, it can also be a string whatever 
+// to uniquely identify it.
+// Key placement can be confusing but always do it where we are reiterating over data and set on the item you are returning 
+
+
+//Passing the entire object -----> "..."
+// can use this as well using the spread operator 
+// const friends = ['john', 'peter', 'anna'];
+// const newFriends = [...friends, 'susan'];
+// console.log(friends);
+// console.log(newFriends);
+// const someObject = {
+//   name: 'john',
+//   job: 'developer', ----> please note this wont be passed as a reference it's just copying 
+
+// Handling events in React
+// - start with vanilla js 
+
+// example: 
+// const btn= document.getElementById('btn'); ---> in prep for a classic click event in vanilla js 
+// btn.addEventListener('click', function (e) {
+//  ---> access event listener
+// ----> do something when event fires
+//}); -----> React is similar i.e camel casing and element, event, function 
+// Example:
+// const EventExamples = () => {
+//   const handleButtonClick = () => {
+//     alert('handle button click');
+//   };
+//   return (
+//     <section>
+//       <button onClick={handleButtonClick}>click me</button>
+//     </section>
+//   );
+// }; ----> onClick, onSubmit, onChange are common but there are many events for react
