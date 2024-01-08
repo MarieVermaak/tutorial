@@ -35,16 +35,24 @@ const BookList = () => {
 };
 
 const EventExamples = () => {
-  const handleFormInput = () => {
-    console.log('handle form input');
+  const handleFormInput = (e) => {
+    console.log(e.target);
+    console.log(e.target.name);
+    console.log(e.target.value);
+
   };
 
   const handleButtonClick = () => {
     alert('handle Button Click');
   };
 
+  const handleFormSubmission = (e) => {
+    e.preventDefault()
+    console.log('Form Submitted');
+  };
+
   return <section>
-    <form>
+    <form onSubmit={ handleFormSubmission }>
       <h1>Typical Form</h1>
       <input type='text'
         name='example'
@@ -59,11 +67,15 @@ const EventExamples = () => {
 };
 
 const Book = (props) => {
-  const { img, title, author } = props
+  const { img, title, author } = props;
+  const displayTitle = () => {
+console.log(title);
+  };
   return (
     <article className='book'>
       <img src={img} />
       <h2>{title}</h2>
+      <button onClick={displayTitle}>display title</button>
       <h4>{author.toUpperCase()}</h4>
     </article>
   );
@@ -197,3 +209,60 @@ root.render(<BookList />); // rendering the greeting component
 //     </section>
 //   );
 // }; ----> onClick, onSubmit, onChange are common but there are many events for react
+
+// EVENTS & FORM SUBMISSION CONTINUED
+// e.target, e.target.name, e.target.value and e.preventDefault most common in this work 
+// <form on Submit{handleFormSubmission}> ---> example 
+
+// Notes on the anonymous function  
+// ---> MIND GRENADE 
+
+// ----> alternative approach
+// ----> pass anonymous function directly 
+// -----> less code 
+
+// Example --> const EventExamples = () => {
+//   return (
+//     <section>
+//       <button onClick={() => console.log('hello there')}>click me</button>
+//     </section>
+//   );
+// }; 
+
+// Example 2: --> You can also access an event object
+//const EventExamples = () => {
+//   return (
+//     <section>
+//       <form>
+//         <h2>Typical Form</h2>
+//         <input
+//           type='text'
+//           name='example'
+//           onChange={(e) => console.log(e.target.value)}
+//           style={{ margin: '1rem 0' }}
+//         />
+//       </form>
+//       <button onClick={() => console.log('you clicked me')}>click me</button> --- not evoking here, just passing it!!
+//     </section>
+//   );
+// };
+
+// MIND GRENADE #2 
+// ---> components are independent by default 
+// ---> react allows you to add functionality alot more specifically then vanilla js would i.e loops etc needed to get the same specificity
+// ---> example of title display: 
+// const Book = (props) => {
+//   const { img, title, author } = props;
+//   const displayTitle = () => {
+//     console.log(title);
+//   };
+
+//   return (
+//     <article className='book'>
+//       <img src={img} alt={title} />
+//       <h2>{title}</h2>
+//       <button onClick={displayTitle}>display title</button> --> allows you to target this specifically
+//       <h4>{author} </h4>
+//     </article>
+//   );
+// };
