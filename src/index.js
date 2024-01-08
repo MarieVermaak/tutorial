@@ -24,12 +24,17 @@ const books = [
 
 
 const BookList = () => {
+  const someValue = 'ShakeAndBake'
+  const displayValue = () => {
+    console.log(someValue)
+  }
   return (
     <section className='booklist'>
       <EventExamples />
       {books.map((book) => {
-        return <Book {...book} key={book.id} />;
+        return <Book {...book} key={book.id} displayValue={displayValue} />;
       })}
+
     </section>
   );
 };
@@ -52,30 +57,28 @@ const EventExamples = () => {
   };
 
   return <section>
-    <form onSubmit={ handleFormSubmission }>
+    <form onSubmit={handleFormSubmission}>
       <h1>Typical Form</h1>
       <input type='text'
         name='example'
         onChange={handleFormInput}
-        style={{ margin: '1rem 0' }} 
-        />
+        style={{ margin: '1rem 0' }}
+      />
     </form>
 
-    <button onClick={handleButtonClick}> Click Me </button>
+    <button onClick= {handleButtonClick}> Click Me </button>
 
   </section >
 };
 
 const Book = (props) => {
-  const { img, title, author } = props;
-  const displayTitle = () => {
-console.log(title);
-  };
+  const { img, title, author, displayValue } = props;
+
   return (
     <article className='book'>
       <img src={img} />
       <h2>{title}</h2>
-      <button onClick={displayTitle}>display title</button>
+      <button onClick={displayValue}>Click Me</button>
       <h4>{author.toUpperCase()}</h4>
     </article>
   );
@@ -249,7 +252,7 @@ root.render(<BookList />); // rendering the greeting component
 
 // MIND GRENADE #2 
 // ---> components are independent by default 
-// ---> react allows you to add functionality alot more specifically then vanilla js would i.e loops etc needed to get the same specificity
+// ---> react allows you to add functionality a lot more specifically then vanilla js would i.e loops etc needed to get the same specificity
 // ---> example of title display: 
 // const Book = (props) => {
 //   const { img, title, author } = props;
@@ -266,3 +269,7 @@ root.render(<BookList />); // rendering the greeting component
 //     </article>
 //   );
 // };
+
+// Prop drilling lol what?
+// --> in React you can only pass data down i.e from BookList --> book component and not the other way around and we can only pass props down
+// Alternatives --> Redux and Context API and other state libraries ---> loading/to come later yay
