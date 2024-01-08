@@ -1,38 +1,17 @@
 import React from "react";
 import ReactDOM from 'react-dom/client';
 import './index.css';
-
-const books = [
-  {
-    author: 'James Clear',
-    title: 'Atomic Habits',
-    img: './images/book-1.jpg',
-    id: 1,
-  },
-
-  {
-    author: 'Daniel James Brown',
-    title: 'The Boys in the Boat',
-    img: './images/book-2.jpg',
-    id: 2,
-  },
-];
-
-
-
-
+import {books} from './books';
+import {Book} from './Book';
 
 
 const BookList = () => {
-const getBook = (id) => {
-  const book = books.find(book => book.id === id);
-  console.log(book)
-}
+
   return (
     <section className='booklist'>
       <EventExamples />
       {books.map((book) => {
-        return <Book {...book} key={book.id} getBook={getBook} />;
+        return <Book {...book} key={book.id} />;
       })}
 
     </section>
@@ -71,21 +50,7 @@ const EventExamples = () => {
   </section >
 };
 
-const Book = (props) => {
-  const { img, title, author, getBook, id} = props;
-  const getSingleBook = () => {
-    getBook(id);
-  };
 
-  return (
-    <article className='book'>
-      <img src={img} />
-      <h2>{title}</h2>
-      <button onClick={getSingleBook}>Display title</button>
-      <h4>{author.toUpperCase()}</h4>
-    </article>
-  );
-};
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -276,3 +241,14 @@ root.render(<BookList />); // rendering the greeting component
 // Prop drilling lol what?
 // --> in React you can only pass data down i.e from BookList --> book component and not the other way around and we can only pass props down
 // Alternatives --> Redux and Context API and other state libraries ---> loading/to come later yay
+
+// Import and Export statements 
+// ---> way for us to split up our app into multiple files + to import/export the code 
+// We are using a named and default and remember with the named imports we need to use the same name 
+// and with the default we can come up  with whatever name we decide 
+// steps to set up -->
+// 1. setup two files in src books.js (data)and Book.js(component)
+// 2. cut books array from index.js
+// 3. add to books.js
+// important to remember when it's our own file import i.e curly braces {} and the item we are exporting is named and specific so we are expecting a accurate named export
+// You can only have 1 default export per file and in the index,js file we don't have to reference {books} specifically, it can be hoooooya if you wanted 
