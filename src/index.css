@@ -33,12 +33,14 @@ body {
   border-radius: 1rem;
   padding: 2rem;
   text-align: center;
+  position: relative; 
 }
 
 
 .book img {
   width: 100%;
   object-fit: cover;
+  padding: 35px;
 
 }
 
@@ -58,3 +60,26 @@ body {
   margin: 1rem 0 0.5rem;
 
 }
+
+.number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1.25rem;
+  background-color: #76b1e9;
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  color: #fff;
+ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+}
+
+h1 {
+padding-top: 4rem;
+padding-left: 2rem;
+text-decoration: underline;
+text-shadow: 2px 2px 2px #CECECE;
+text-align: center;
+font-size: 45px;
+}
+

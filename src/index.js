@@ -8,13 +8,16 @@ import {Book} from './Book';
 const BookList = () => {
 
   return (
-    <section className='booklist'>
-      <EventExamples />
-      {books.map((book) => {
-        return <Book {...book} key={book.id} />;
+    <> 
+    <h1 className="text">Amazon Best Sellers</h1>                      
+    <section className='booklist'>  
+      <EventExamples />              
+      {books.map((book, index) => {
+        return <Book {...book} key={book.id} number={index}/>;
       })}
 
     </section>
+    </> 
   );
 };
 
@@ -35,19 +38,6 @@ const EventExamples = () => {
     console.log('Form Submitted');
   };
 
-  return <section>
-    <form onSubmit={handleFormSubmission}>
-      <h1>Typical Form</h1>
-      <input type='text'
-        name='example'
-        onChange={handleFormInput}
-        style={{ margin: '1rem 0' }}
-      />
-    </form>
-
-    <button onClick= {handleButtonClick}> Click Me </button>
-
-  </section >
 };
 
 
@@ -261,3 +251,6 @@ root.render(<BookList />); // rendering the greeting component
 // --> import images and change img = img1. img2, img3 etc
 //  ---> so import import img1 from './images/book-1.jpg'; for example
 // no longer external use of images 
+
+//----> The title challenge notes
+// --->// We can't put in a h1 for example, we can't return two adjacent elements! Gotcha :) the solution is a PARENT! React.Fragment before or <> </> and then the h1
