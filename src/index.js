@@ -252,3 +252,12 @@ root.render(<BookList />); // rendering the greeting component
 // 3. add to books.js
 // important to remember when it's our own file import i.e curly braces {} and the item we are exporting is named and specific so we are expecting a accurate named export
 // You can only have 1 default export per file and in the index,js file we don't have to reference {books} specifically, it can be hoooooya if you wanted 
+
+
+// Local images (src folder)
+// --> React optimizes those assets for us 
+//  --> download images into images folder
+// --> drag into src folder
+// --> import images and change img = img1. img2, img3 etc
+//  ---> so import import img1 from './images/book-1.jpg'; for example
+// no longer external use of images 
